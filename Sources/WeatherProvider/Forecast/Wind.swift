@@ -12,7 +12,7 @@ public enum WXPWindDirection: String {
     case none = "N/A"
 }
 
-public enum WXPWind: CustomStringConvertible, Equatable {
+public enum WXPWind: Equatable {
     case single(Measurement<UnitSpeed>, direction: WXPWindDirection)
     case range(lhs: Measurement<UnitSpeed>, rhs: Measurement<UnitSpeed>, direction: WXPWindDirection)
 
@@ -60,7 +60,10 @@ public enum WXPWind: CustomStringConvertible, Equatable {
             self = .single(Measurement(value: value, unit: unit), direction: windDirection)
         }
     }
+}
 
+#if os(iOS) || os(macOS)
+extension WXPWind: CustomStringConvertible {
     public var description: String {
         let formatter = MeasurementFormatter()
         switch self {
@@ -71,3 +74,4 @@ public enum WXPWind: CustomStringConvertible, Equatable {
         }
     }
 }
+#endif
