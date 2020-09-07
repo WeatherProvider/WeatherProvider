@@ -4,6 +4,7 @@ import GeohashKit
 public protocol WeatherProvider {
     typealias ForecastPeriodHandler = (Result<WXPForecastPeriod, WXPError>) -> Void
     typealias ForecastHandler = (Result<WXPForecast, WXPError>) -> Void
+    var region: Set<Geohash.Hash> { get }
     var name: String { get }
 
     init()
