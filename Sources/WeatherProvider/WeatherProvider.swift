@@ -1,10 +1,17 @@
 import Foundation
+import GeohashKit
 
 public protocol WeatherProvider {
-    typealias ForecastHandler = (Result<Forecast, Error>) -> Void
+    typealias ForecastPeriodHandler = (Result<WXPForecastPeriod, WXPError>) -> Void
+    typealias ForecastHandler = (Result<WXPForecast, WXPError>) -> Void
     var name: String { get }
+
+    init()
+
+    func getCurrentConditions(for location: Location,
+                              then handler: @escaping ForecastPeriodHandler)
 
     func getForecast(for location: Location,
                      at time: Date,
-                     then handler: ForecastHandler)
+                     then handler: @escaping ForecastHandler)
 }

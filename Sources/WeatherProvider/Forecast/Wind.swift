@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  WXPWind.swift
 //  
 //
 //  Created by Alan Chu on 7/13/20.
@@ -7,14 +7,14 @@
 
 import Foundation
 
-public enum WindDirection: String {
+public enum WXPWindDirection: String {
     case n, nne, ne, ene, e, ese, se, sse, s, ssw, sw, wsw, w, wnw, nw, nnw
     case none = "N/A"
 }
 
-public enum Wind: CustomStringConvertible, Equatable {
-    case single(Measurement<UnitSpeed>, direction: WindDirection)
-    case range(lhs: Measurement<UnitSpeed>, rhs: Measurement<UnitSpeed>, direction: WindDirection)
+public enum WXPWind: CustomStringConvertible, Equatable {
+    case single(Measurement<UnitSpeed>, direction: WXPWindDirection)
+    case range(lhs: Measurement<UnitSpeed>, rhs: Measurement<UnitSpeed>, direction: WXPWindDirection)
 
     /// A structured model for wind forecasts.
     ///
@@ -33,7 +33,7 @@ public enum Wind: CustomStringConvertible, Equatable {
         let unit: UnitSpeed = windText.lowercased().hasSuffix("mph") ? .milesPerHour : .kilometersPerHour
         let split = windText.split(separator: " ")
 
-        let windDirection = WindDirection(rawValue: direction.lowercased()) ?? .none
+        let windDirection = WXPWindDirection(rawValue: direction.lowercased()) ?? .none
 
         // weather.gov API uses the "to" keyword.
         if windText.contains("to") || windText.contains("-") {
