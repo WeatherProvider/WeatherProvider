@@ -3,6 +3,12 @@
 # WeatherProvider
 A free and open-source weather API, powered by government data.
 
+# Platforms
+![Swift](https://github.com/WeatherProvider/WeatherProvider/workflows/Swift/badge.svg)
+- Apple-platforms
+- Ubuntu
+
+# About
 ## Flexible
 Data sources can be easily incorporated by conforming to `WeatherProvider`. Failing data sources are handled gracefully.
 
@@ -15,10 +21,14 @@ this library on a server if you prefer more control. See [WeatherProvider-Server
 Instead of providing an accurate coordinate, you may provide a location in the 
 form of a Geohash, which has varying degrees of accuracy depending on your configuration.
 
+
+# Installation
+Use Swift Package Manager.
+
 ## Important
-This project is currently **unstable**. It is subject to major API changes.
+This project is currently **unstable**, subject to major API changes.
 As of now, a lot of the terminology is based off the United States National Weather Services definitions.
-I am looking to generalize the weather data as I continue to incorporate more sources.
+I am looking to generalize the model as I continue to incorporate more sources.
 
 # License
 - This Swift library is MIT License.
