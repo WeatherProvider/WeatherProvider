@@ -19,3 +19,7 @@ form of a Geohash, which has varying degrees of accuracy depending on your confi
 This project is currently **unstable**. It is subject to major API changes.
 As of now, a lot of the terminology is based off the United States National Weather Services definitions.
 I am looking to generalize the weather data as I continue to incorporate more sources.
+
+# License
+- This Swift library is MIT License.
+- Data source licenses may vary, but in general should be public-domain.
