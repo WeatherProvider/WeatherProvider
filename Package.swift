@@ -21,7 +21,7 @@ let package = Package(
         .package(url: "https://github.com/GEOSwift/GEOSwift.git", from: "7.0.0"),
         .package(url: "https://github.com/ualch9/GeohashKit.git", from: "2.0.0"),
 
-        .package(url: "https://github.com/ualch9/NationalWeatherService-Swift.git", from: "0.3.0")
+        .package(url: "https://github.com/WeatherProvider/NationalWeatherService-Swift.git", from: "0.3.0")
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.

@@ -1,18 +1,40 @@
 import Foundation
 import GeohashKit
+import NationalWeatherService
 
-public protocol WeatherProvider {
-    typealias ForecastPeriodHandler = (Result<WXPForecastPeriod, WXPError>) -> Void
-    typealias ForecastHandler = (Result<WXPForecast, WXPError>) -> Void
-    var region: Set<Geohash.Hash> { get }
-    var name: String { get }
+public struct WeatherProvider: WXPProvider {
+    public static var providers: [WXPProvider.Type] = [
+        NationalWeatherService.self
+    ]
 
-    init()
+    public static var region: Set<Geohash.Hash> = {
+        let flattenedRegions = WeatherProvider.providers.flatMap {
+            $0.region
+        }
 
-    func getCurrentConditions(for location: Location,
-                              then handler: @escaping ForecastPeriodHandler)
+        return Set<Geohash.Hash>(flattenedRegions)
+    }()
 
-    func getForecast(for location: Location,
-                     at time: Date,
-                     then handler: @escaping ForecastHandler)
+    public static var name: String { "Weather Provider" }
+
+    public init() { }
+
+    public func getCurrentConditions(for location: Location, then handler: @escaping ForecastPeriodHandler) {
+        guard let provider = bestAvailableProvider(for: location) else {
+            handler(.failure(.noDataAvailable))
+            return
+        }
+    }
+
+    public func getForecast(for location: Location, at time: Date, then handler: @escaping ForecastHandler) {
+        guard let provider = bestAvailableProvider(for: location) else {
+            handler(.failure(.noDataAvailable))
+            return
+        }
+    }
+
+    func bestAvailableProvider(for location: Location) -> WXPProvider.Type? {
+//        let geoHash = 
+        return nil
+    }
 }

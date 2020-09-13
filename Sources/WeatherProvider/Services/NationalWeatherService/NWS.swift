@@ -1,18 +1,11 @@
-//
-//  NWS.swift
-//  
-//
-//  Created by Alan Chu on 8/4/20.
-//
-
 import Foundation
 import GeohashKit
 import NationalWeatherService
 
-extension NationalWeatherService: WeatherProvider {
-    public var name: String { "National Weather Service" }
+extension NationalWeatherService: WXPProvider {
+    public static var name: String { "National Weather Service" }
 
-    public var region: Set<Geohash.Hash> {
+    public static var region: Set<Geohash.Hash> {
         return [
             // Lower 48
             "c0",
