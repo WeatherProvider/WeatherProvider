@@ -1,3 +1,12 @@
+
+| Under Active Development, non-functioning at this time |
+|----|
+| If you are interested in weather data now, try: |
+| United States: [NationalWeatherService-Swift](https://github.com/WeatherProvider/NationalWeatherService-Swift) |
+| Canada: [MeteorologicalServiceOfCanada-Swift](https://github.com/WeatherProvider/MeteorologicalServiceOfCanada-Swift)|
+| If you are interested in helping out, check out <kbd>Needs Help</kbd> issues |
+
+
 <img src="https://user-images.githubusercontent.com/22162410/92952820-799c5300-f415-11ea-8874-2d1d616c8150.png" alt="Weather Provider Logo" align="left" width="64">
 
 # WeatherProvider
