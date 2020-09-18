@@ -5,58 +5,6 @@ import NationalWeatherService
 extension NationalWeatherService: WXPProvider {
     public static var name: String { "National Weather Service" }
 
-    public static var region: Set<Geohash.Hash> {
-        return [
-            // Lower 48
-            "c0",
-            "c2",
-            "c8",
-            "cb",
-            "f0",
-            "f2",
-            "f8",
-            "9p",
-            "9r",
-            "9x",
-            "9z",
-            "dp",
-            "dr",
-            "9n",
-            "9q",
-            "9w",
-            "9y",
-            "dn",
-            "dq",
-            "9m",
-            "9t",
-            "9v",
-            "dj",
-            "9u",
-            "dh",
-
-            // Alaska
-            "bk",
-            "bs",
-            "bu",
-            "b5",
-            "b7",
-            "be",
-            "bg",
-            "b6",
-            "bd",
-            "bf",
-            "c4",
-            "c1",
-            "zc",
-            "b1",
-            "b3",
-
-            // Hawaii
-            "87",
-            "8e"
-        ]
-    }
-
     public init() {
         guard let userAgent = ProcessInfo.processInfo.environment["NWS_USER_AGENT"] else {
             preconditionFailure("Missing \"NWS_USER_AGENT\" environment variable")
@@ -120,3 +68,31 @@ extension Forecast.Period: WXPForecastPeriod {
         return shortForecast
     }
 }
+
+// Canada:
+//c,
+//f,
+//bf,
+//bg,
+//bu
+//
+//// Toronto ish
+//dpv
+//dpt
+//dpy
+//dpw
+//dpz
+//dpx
+//drb
+//drc
+//drf
+//dpsb
+//dpkz
+//
+//// nova scotia
+//dxb
+//dxc
+//dxf
+//dxg
+//dx9
+//
