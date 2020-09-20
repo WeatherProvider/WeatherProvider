@@ -2,19 +2,17 @@ import Foundation
 import GeohashKit
 import NationalWeatherService
 
-extension NationalWeatherService: WXPProvider {
+class WXPNationalWeatherService: WXPProvider {
+    let nws: NationalWeatherService
+
     public static var name: String { "National Weather Service" }
 
-    public init() {
-        guard let userAgent = ProcessInfo.processInfo.environment["NWS_USER_AGENT"] else {
-            preconditionFailure("Missing \"NWS_USER_AGENT\" environment variable")
-        }
-
-        self.init(userAgent: userAgent)
+    required init() {
+        nws = NationalWeatherService(userAgent: ProcessInfo.processInfo.environment["NWS_USER_AGENT"]!)
     }
 
     public func getCurrentConditions(for location: Location, then handler: @escaping (Result<WXPForecastPeriod, WXPError>) -> Void) {
-        self.currentCondition(latitude: location.latitude, longitude: location.longitude) { result in
+        nws.currentCondition(latitude: location.latitude, longitude: location.longitude) { result in
             switch result {
             case .success(let forecast):
                 handler(.success(forecast))

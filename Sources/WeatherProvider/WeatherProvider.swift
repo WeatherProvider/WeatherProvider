@@ -2,10 +2,16 @@ import Foundation
 import GeohashKit
 import NationalWeatherService
 
-public struct WeatherProvider: WXPProvider {
+class WeatherProvider: WXPProvider {
     public static var providers: [WXPProvider.Type] = [
-        NationalWeatherService.self
+        WXPNationalWeatherService.self
     ]
+
+    static var trie: Trie = {
+        let trie = Trie()
+        region.forEach { trie.insert(word: $0) }
+        return trie
+    }()
 
     public static var region: Set<Geohash.Hash> = {
         let flattenedRegions = WeatherProvider.providers.flatMap {
@@ -17,7 +23,7 @@ public struct WeatherProvider: WXPProvider {
 
     public static var name: String { "Weather Provider" }
 
-    public init() { }
+    required public init() { }
 
     public func getCurrentConditions(for location: Location, then handler: @escaping ForecastPeriodHandler) {
         guard let provider = bestAvailableProvider(for: location) else {
@@ -33,8 +39,13 @@ public struct WeatherProvider: WXPProvider {
         }
     }
 
+    // The automagical part of this whole thing
     func bestAvailableProvider(for location: Location) -> WXPProvider.Type? {
-//        let geoHash = 
+        guard let mostPreciseHash = WeatherProvider.region.sorted().last else { return nil }
+        guard let geohash = Geohash(coordinates: (location.latitude, location.longitude), precision: mostPreciseHash.count) else { return nil }
+
+        let truncated = geohash.geohash.prefix(mostPreciseHash.count)
+        let potential = WeatherProvider.region.filter { geohash.geohash.hasPrefix($0) }
         return nil
     }
 }

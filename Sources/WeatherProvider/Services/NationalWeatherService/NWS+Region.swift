@@ -8,7 +8,7 @@
 import GeohashKit
 import NationalWeatherService
 
-extension NationalWeatherService {
+extension WXPNationalWeatherService {
     public static var region: Set<Geohash.Hash> {
         return [
             // Lower 48th
@@ -36,4 +36,10 @@ extension NationalWeatherService {
             "87", "8e"
         ]
     }
+
+    static var trie: Trie = {
+        let trie = Trie()
+        region.forEach { trie.insert(word: $0) }
+        return trie
+    }()
 }

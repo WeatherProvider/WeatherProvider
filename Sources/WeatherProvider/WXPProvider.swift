@@ -1,7 +1,7 @@
 import Foundation
 import GeohashKit
 
-public protocol WXPProvider {
+protocol WXPProvider: class {
     typealias ForecastPeriodHandler = (Result<WXPForecastPeriod, WXPError>) -> Void
     typealias ForecastHandler = (Result<WXPForecast, WXPError>) -> Void
 
