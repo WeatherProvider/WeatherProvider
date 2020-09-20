@@ -37,6 +37,7 @@ extension WXPNationalWeatherService {
         ]
     }
 
+    // TODO: DRY this
     static var trie: Trie = {
         let trie = Trie()
         region.forEach { trie.insert(word: $0) }

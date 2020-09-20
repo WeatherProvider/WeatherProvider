@@ -19,12 +19,13 @@ struct BestAvailableProviders {
         for provider in providers {
             for x in 0..<truncatedHash.count {
                 let searching = String(truncatedHash.prefix(truncatedHash.count - x))
-                let result = provider.trie.findWordsWithPrefix(prefix: searching)
+                let wordsWithPrefixes = provider.trie.findWordsWithPrefix(prefix: searching)
 
-                if let potentialResult = result.first {
+                for potentialResult in wordsWithPrefixes where
+                    truncatedHash.hasPrefix(potentialResult) {
                     results[potentialResult] = provider
-                    break
                 }
+                // TODO: Maybe we don't need a trie?
             }
         }
 
