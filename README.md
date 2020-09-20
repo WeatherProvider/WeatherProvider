@@ -35,6 +35,9 @@ form of a Geohash, which has varying degrees of accuracy depending on your confi
 # Installation
 Use Swift Package Manager.
 
+## IMPORTANT
+YOU NEED TO DO SOME CONFIGURATION BEFORE YOU CAN USE WEATHER PROVIDER. SEE [CONFIGURATION](https://github.com/WeatherProvider/WeatherProvider/wiki/Configuration).
+
 ## How to Use
 As of 0.3.0, this package only supports the National Weather Service and getting the current weather condition.
 
