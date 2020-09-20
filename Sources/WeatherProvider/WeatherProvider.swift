@@ -5,9 +5,11 @@ class WeatherProvider: WXPProvider {
     public static let GeohashPrecision: Int = 6
 
     // MARK: - WXPProvider properties
-    public static var providers: [WXPProvider.Type] = [
-        WXPNationalWeatherService.self
-    ]
+    public var providers: [WXPProvider.Type] {
+        return [
+            WXPNationalWeatherService.self
+        ]
+    }
 
     static var trie: Trie = {
         let trie = Trie()
@@ -16,7 +18,7 @@ class WeatherProvider: WXPProvider {
     }()
 
     public static var region: Set<Geohash.Hash> = {
-        let flattenedRegions = WeatherProvider.providers.flatMap {
+        let flattenedRegions = WeatherProvider().providers.flatMap {
             $0.region
         }
 
@@ -29,29 +31,43 @@ class WeatherProvider: WXPProvider {
     
     required init() { }
 
+    // MARK: - Get current conditions
+
     public func getCurrentConditions(for location: Location, then handler: @escaping ForecastPeriodHandler) {
-        guard let providers = WeatherProvider.bestAvailableProvider(for: location) else {
+        guard let providers = bestAvailableProvider(for: location) else {
             handler(.failure(.noDataAvailable))
             return
         }
 
-        let operations: [GetCurrentConditions] = providers.providers.compactMap { provider in
+        let records: [GetWeatherRecord] = providers.providers.compactMap { provider in
             guard let geohash = Geohash(geohash: provider.key) else { return nil }
-            return GetCurrentConditions(record: GetWeatherRecord(geohash: geohash, provider: provider.value))
+            return GetWeatherRecord(geohash: geohash, provider: provider.value, location: location)
         }
 
-        let operation = GetWeather(operations: operations)
+        let operation = operationForCurrentConditions(records: records)
         operation.completionBlock = {
             handler(operation.result ?? .failure(.noDataAvailable))
         }
         operationQueue.addOperation(operation)
     }
 
+    func operationForCurrentConditions(records: [GetWeatherRecord]) -> GetWeather<WXPForecastPeriod> {
+        let operations: [GetCurrentConditions] = records.compactMap { record in
+            return GetCurrentConditions(record: record)
+        }
+
+        return GetWeather(operations: operations)
+    }
+
+    // MARK: - Get forecast
+
     public func getForecast(for location: Location, at time: Date, then handler: @escaping ForecastHandler) {
         handler(.failure(.noDataAvailable))
     }
 
-    static func bestAvailableProvider(for location: Location) -> BestAvailableProviders? {
+    // MARK: - Helpers
+
+    func bestAvailableProvider(for location: Location) -> BestAvailableProviders? {
         let geohash: Geohash
         if let hash = location as? Geohash {
             geohash = hash
@@ -62,6 +78,6 @@ class WeatherProvider: WXPProvider {
             geohash = hash
         }
 
-        return BestAvailableProviders(geohash: geohash.geohash, providers: WeatherProvider.providers)
+        return BestAvailableProviders(geohash: geohash.geohash, providers: self.providers)
     }
 }

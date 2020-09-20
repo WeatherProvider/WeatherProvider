@@ -1,4 +1,21 @@
 import Foundation
+import GeohashKit
+
+class GetWeatherRecord {
+    var geohash: Geohash
+    var provider: WXPProvider.Type
+
+    var location: Location
+
+    /// - parameter geohash: The Geohash associated with the Provider.
+    /// - parameter provider: The Provider responsible for the Geohash.
+    /// - parameter location: The location where to lookup the weather information.
+    init(geohash: Geohash, provider: WXPProvider.Type, location: Location) {
+        self.geohash = geohash
+        self.provider = provider
+        self.location = location
+    }
+}
 
 class GetWeatherOperation<Success>: AsyncOperation {
     var result: Result<Success, WXPError>?

@@ -1,10 +1,3 @@
-//
-//  File.swift
-//  
-//
-//  Created by Alan Chu on 9/20/20.
-//
-
 import Foundation
 import GeohashKit
 @testable import WeatherProvider
@@ -26,7 +19,7 @@ extension Fixtures {
         required init() { }
 
         public func getCurrentConditions(for location: Location, then handler: @escaping (Result<WXPForecastPeriod, WXPError>) -> Void) {
-            fatalError()
+            handler(.success(Fixtures.GenericUSAForecastPeriod))
         }
 
         public func getForecast(for location: Location, at time: Date, then handler: @escaping (Result<WXPForecast, WXPError>) -> Void) {
@@ -50,7 +43,7 @@ extension Fixtures {
         required init() { }
 
         public func getCurrentConditions(for location: Location, then handler: @escaping (Result<WXPForecastPeriod, WXPError>) -> Void) {
-            fatalError()
+            handler(.success(Fixtures.GenericCanadaForecastPeriod))
         }
 
         public func getForecast(for location: Location, at time: Date, then handler: @escaping (Result<WXPForecast, WXPError>) -> Void) {
