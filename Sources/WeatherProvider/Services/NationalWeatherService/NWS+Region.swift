@@ -1,10 +1,3 @@
-//
-//  File.swift
-//  
-//
-//  Created by Alan Chu on 9/13/20.
-//
-
 import GeohashKit
 import NationalWeatherService
 
