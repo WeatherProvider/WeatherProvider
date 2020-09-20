@@ -66,31 +66,3 @@ extension Forecast.Period: WXPForecastPeriod {
         return shortForecast
     }
 }
-
-// Canada:
-//c,
-//f,
-//bf,
-//bg,
-//bu
-//
-//// Toronto ish
-//dpv
-//dpt
-//dpy
-//dpw
-//dpz
-//dpx
-//drb
-//drc
-//drf
-//dpsb
-//dpkz
-//
-//// nova scotia
-//dxb
-//dxc
-//dxf
-//dxg
-//dx9
-//

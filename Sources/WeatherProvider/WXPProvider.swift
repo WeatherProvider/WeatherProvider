@@ -8,6 +8,8 @@ protocol WXPProvider: class {
     static var region: Set<Geohash.Hash> { get }
     static var name: String { get }
 
+    static var trie: Trie { get }
+
     init()
 
     func getCurrentConditions(for location: Location,
