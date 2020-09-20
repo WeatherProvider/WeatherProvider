@@ -1,8 +1,10 @@
 import Foundation
 import GeohashKit
-import NationalWeatherService
 
 class WeatherProvider: WXPProvider {
+    public static let GeohashPrecision: Int = 6
+
+    // MARK: - WXPProvider properties
     public static var providers: [WXPProvider.Type] = [
         WXPNationalWeatherService.self
     ]
@@ -23,29 +25,43 @@ class WeatherProvider: WXPProvider {
 
     public static var name: String { "Weather Provider" }
 
-    required public init() { }
+    var operationQueue: OperationQueue = OperationQueue()
+    
+    required init() { }
 
     public func getCurrentConditions(for location: Location, then handler: @escaping ForecastPeriodHandler) {
-        guard let provider = bestAvailableProvider(for: location) else {
+        guard let providers = WeatherProvider.bestAvailableProvider(for: location) else {
             handler(.failure(.noDataAvailable))
             return
         }
+
+        let operations: [GetCurrentConditions] = providers.providers.compactMap { provider in
+            guard let geohash = Geohash(geohash: provider.key) else { return nil }
+            return GetCurrentConditions(record: GetWeatherRecord(geohash: geohash, provider: provider.value))
+        }
+
+        let operation = GetWeather(operations: operations)
+        operation.completionBlock = {
+            handler(operation.result ?? .failure(.noDataAvailable))
+        }
+        operationQueue.addOperation(operation)
     }
 
     public func getForecast(for location: Location, at time: Date, then handler: @escaping ForecastHandler) {
-        guard let provider = bestAvailableProvider(for: location) else {
-            handler(.failure(.noDataAvailable))
-            return
-        }
+        handler(.failure(.noDataAvailable))
     }
 
-    // The automagical part of this whole thing
-    func bestAvailableProvider(for location: Location) -> WXPProvider.Type? {
-        guard let mostPreciseHash = WeatherProvider.region.sorted().last else { return nil }
-        guard let geohash = Geohash(coordinates: (location.latitude, location.longitude), precision: mostPreciseHash.count) else { return nil }
+    static func bestAvailableProvider(for location: Location) -> BestAvailableProviders? {
+        let geohash: Geohash
+        if let hash = location as? Geohash {
+            geohash = hash
+        } else {
+            guard let hash = Geohash(coordinates: (location.latitude, location.longitude), precision: WeatherProvider.GeohashPrecision) else {
+                return nil
+            }
+            geohash = hash
+        }
 
-        let truncated = geohash.geohash.prefix(mostPreciseHash.count)
-        let potential = WeatherProvider.region.filter { geohash.geohash.hasPrefix($0) }
-        return nil
+        return BestAvailableProviders(geohash: geohash.geohash, providers: WeatherProvider.providers)
     }
 }

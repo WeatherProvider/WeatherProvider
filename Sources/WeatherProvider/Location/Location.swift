@@ -10,6 +10,12 @@ import GeohashKit
 public protocol Location {
     var latitude: Double { get }
     var longitude: Double { get }
+}
 
-    init(geohash: Geohash)
+public struct Coordinates: Location {
+    public var latitude: Double
+    public var longitude: Double 
+}
+
+extension Geohash: Location {
 }

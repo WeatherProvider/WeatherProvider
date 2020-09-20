@@ -1,5 +1,6 @@
 import GeohashKit
 
+// WeatherProvider ~automagically~ finds the best available provider!
 struct BestAvailableProviders {
     var providers: [Dictionary<Geohash.Hash, WXPProvider.Type>.Element]//[(geohash: Geohash.Hash, provider: WXPProvider.Type)]
 
