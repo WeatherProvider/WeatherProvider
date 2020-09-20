@@ -69,4 +69,9 @@ final class WeatherProviderIntegrationTests: XCTestCase {
         XCTAssertEqual(forecast.forecast, Fixtures.GenericUSAForecastPeriod.forecast)
         XCTAssertEqual(forecast.detailedForecast, Fixtures.GenericUSAForecastPeriod.detailedForecast)
     }
+
+    static var allTests = [
+        ("testFailing", testFailing),
+        ("testSuccessful", testSuccessful)
+    ]
 }

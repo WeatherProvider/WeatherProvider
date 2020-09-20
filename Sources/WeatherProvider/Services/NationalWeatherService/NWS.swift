@@ -8,7 +8,7 @@ class WXPNationalWeatherService: WXPProvider {
     public static var name: String { "National Weather Service" }
 
     required init() {
-        nws = NationalWeatherService(userAgent: ProcessInfo.processInfo.environment["NWS_USER_AGENT"]!)
+        nws = NationalWeatherService(userAgent: ProcessInfo.processInfo.environment["NWS_AGENT_CONTACT"]!)
     }
 
     public func getCurrentConditions(for location: Location, then handler: @escaping (Result<WXPForecastPeriod, WXPError>) -> Void) {

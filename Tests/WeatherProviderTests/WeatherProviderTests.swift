@@ -45,15 +45,15 @@ final class WeatherProviderTests: XCTestCase {
         }
     }
 
-    func testBlah() {
-        let getConditionsExpectation = self.expectation(description: "asdf")
-        WeatherProvider().getCurrentConditions(for: Coordinates(latitude: 47.6174, longitude: -122.2017)) { result in
-            print(result)
-            getConditionsExpectation.fulfill()
-        }
-
-        waitForExpectations(timeout: 10, handler: nil)
-    }
+//    func testBlah() {
+//        let getConditionsExpectation = self.expectation(description: "asdf")
+//        WeatherProvider().getCurrentConditions(for: Coordinates(latitude: 47.6174, longitude: -122.2017)) { result in
+//            print(result)
+//            getConditionsExpectation.fulfill()
+//        }
+//
+//        waitForExpectations(timeout: 10, handler: nil)
+//    }
 
     static var allTests = [
         ("testBestAvailableProvider", testBestAvailableProvider),
