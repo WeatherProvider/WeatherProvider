@@ -5,14 +5,14 @@
 //  Created by Alan Chu on 7/13/20.
 //
 
+import GeohashKit
+
 #if canImport(CoreLocation)
 import CoreLocation
 
 extension CLLocationCoordinate2D: Location {
-}
-
-extension CLLocation: Location {
-    public var latitude: Double { self.coordinate.latitude }
-    public var longitude: Double { self.coordinate.longitude }
+    public init(geohash: Geohash) {
+        self.init(latitude: geohash.latitude, longitude: geohash.longitude)
+    }
 }
 #endif
