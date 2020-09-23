@@ -1,0 +1,13 @@
+{
+    "configurations": [
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Run your Executable",
+            "program": "${workspaceFolder}/WeatherProvider/.build/debug/WeatherProvider",
+            "args": [],
+            "cwd": "${workspaceFolder}/WeatherProvider",
+            "preLaunchTask": "swift-build"
+        }
+    ]
+}
