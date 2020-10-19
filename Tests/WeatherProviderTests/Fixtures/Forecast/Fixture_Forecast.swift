@@ -7,6 +7,8 @@ extension Fixtures {
         var temperature: Measurement<UnitTemperature>
         var wxpWind: WXPWind?
 
+        var wxpCondition: WXPCondition?
+
         var forecast: String?
         var detailedForecast: String?
     }
@@ -17,6 +19,7 @@ extension Fixtures {
         return ForecastPeriod(applicableTime: dateInterval,
                               temperature: .init(value: 19.0, unit: .celsius),
                               wxpWind: .single(.init(value: 11, unit: .kilometersPerHour), direction: .nnw),
+                              wxpCondition: .clear_day,
                               forecast: "Mostly Sunny",
                               detailedForecast: "Mostly sunny. High near 19, with temperatures falling to around 16 in the afternoon. North northwest wind around 11 km/h.")
     }
@@ -29,6 +32,7 @@ extension Fixtures {
         return ForecastPeriod(applicableTime: dateInterval,
                               temperature: .init(value: 16.2, unit: .celsius),
                               wxpWind: .single(.init(value: 4, unit: .kilometersPerHour), direction: .ese),
+                              wxpCondition: .clear_day,
                               forecast: nil,
                               detailedForecast: nil)
     }
