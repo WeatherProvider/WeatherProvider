@@ -35,6 +35,7 @@ final class WeatherProviderIntegrationTests: XCTestCase {
         XCTAssertEqual(forecast.applicableTime, Fixtures.GenericCanadaForecastPeriod.applicableTime)
         XCTAssertEqual(forecast.temperature, Fixtures.GenericCanadaForecastPeriod.temperature)
         XCTAssertEqual(forecast.wxpWind, Fixtures.GenericCanadaForecastPeriod.wxpWind)
+        XCTAssertEqual(forecast.wxpCondition, Fixtures.GenericCanadaForecastPeriod.wxpCondition)
         XCTAssertEqual(forecast.forecast, Fixtures.GenericCanadaForecastPeriod.forecast)
         XCTAssertEqual(forecast.detailedForecast, Fixtures.GenericCanadaForecastPeriod.detailedForecast)
     }
@@ -66,6 +67,7 @@ final class WeatherProviderIntegrationTests: XCTestCase {
         XCTAssertEqual(forecast.applicableTime, Fixtures.GenericUSAForecastPeriod.applicableTime)
         XCTAssertEqual(forecast.temperature, Fixtures.GenericUSAForecastPeriod.temperature)
         XCTAssertEqual(forecast.wxpWind, Fixtures.GenericUSAForecastPeriod.wxpWind)
+        XCTAssertEqual(forecast.wxpCondition, Fixtures.GenericUSAForecastPeriod.wxpCondition)
         XCTAssertEqual(forecast.forecast, Fixtures.GenericUSAForecastPeriod.forecast)
         XCTAssertEqual(forecast.detailedForecast, Fixtures.GenericUSAForecastPeriod.detailedForecast)
     }

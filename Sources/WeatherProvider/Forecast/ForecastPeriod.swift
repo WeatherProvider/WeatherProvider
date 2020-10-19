@@ -12,6 +12,8 @@ public protocol WXPForecastPeriod {
     var temperature: Measurement<UnitTemperature> { get }
     var wxpWind: WXPWind? { get }
 
+    var wxpCondition: WXPCondition? { get }
+
     var forecast: String? { get }
     var detailedForecast: String? { get }
 }
