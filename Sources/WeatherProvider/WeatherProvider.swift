@@ -1,7 +1,7 @@
 import Foundation
 import GeohashKit
 
-class WeatherProvider: WXPProvider {
+public class WeatherProvider: WXPProvider {
     public static let GeohashPrecision: Int = 6
 
     // MARK: - WXPProvider properties
@@ -11,7 +11,7 @@ class WeatherProvider: WXPProvider {
         ]
     }
 
-    static var trie: Trie = {
+    public static var trie: Trie = {
         let trie = Trie()
         region.forEach { trie.insert(word: $0) }
         return trie
@@ -29,7 +29,7 @@ class WeatherProvider: WXPProvider {
 
     var operationQueue: OperationQueue = OperationQueue()
     
-    required init() { }
+    required public init() { }
 
     // MARK: - Get current conditions
 
